@@ -192,32 +192,58 @@ from datetime import date, datetime
 #                  input("Digite a última data de acesso: "),
 #                  input("Qual a última estação acessada: ").upper()]
 
-usuarios={}
-opcao=input("O que deseja realizar?", "<I> para inserir","<P> para perquisar","<E> para excluir", "<L> para listar um usuario").upper()
-while opcao=="I" or opcao=="P" or opcao=="E" or opcao=="L":
-   if opcao=="I":
-    chave=input("Digite o login").upper()
-    usuarios["Chaves"] = [input("Digite o nome: ").upper(),
-                          input("Digite a pultima data de acesso: "),
-                          input("Qual a última estação acessada: ").upper()]  
-opcao=input("O que deseja realizar?", "<I> para inserir","<P> para perquisar","<E> para excluir", "<L> para listar um usuario").upper()
+# --------------------------------------------PARTE 2-----------------------------------------------
 
-from Funcoes import *
-usuarios={}
+# usuarios={}
+# opcao=input("O que deseja realizar?", "<I> para inserir","<P> para perquisar","<E> para excluir", "<L> para listar um usuario").upper()
+# while opcao=="I" or opcao=="P" or opcao=="E" or opcao=="L":
+#    if opcao=="I":
+#     chave=input("Digite o login").upper()
+#     usuarios["Chaves"] = [input("Digite o nome: ").upper(),
+#                           input("Digite a pultima data de acesso: "),
+#                           input("Qual a última estação acessada: ").upper()]  
+# opcao=input("O que deseja realizar?", "<I> para inserir","<P> para perquisar","<E> para excluir", "<L> para listar um usuario").upper()
 
-opcao=perguntar()
-while opcao=="I" or opcao=="P" or opcao=="E" or opcao=="L":
+# from Funcoes import *
+# usuarios = {}
 
-    if opcao=="I":
-       inserir(usuarios)
+# while True:
+#     opcao = perguntar()
+#     if opcao == "I":
+#        inserir(usuarios)
+#     elif opcao == "P":
+#        chave = input("Digite o código do lançamento que deseja pesquisar: ")
+#        pesquisar(usuarios, chave)
+#     elif opcao == "E": 
+#        chave = input("Digite o código do lançamento que deseja excluir: ")
+#     elif opcao == "L":
+#        listar(usuarios)
+#     elif opcao == "S":
+#        print("Encerrando o programa.")
+#        break
+#     else:
+#        print("Opção inválida! Tente novamente.") 
 
-    if opcao == "P": 
-       perguntar(usuarios,input("Qual login desejar pesquisar?"))
+ips={}
+resp ="S"
+while resp == "S":
+    ips[(input("Digite os dois prineiros octetos: "),
+       input("Digite os dois últimos octetos: "))] = input("Nome da máquina: ")
+    resp = input("Digite <S> para continuar: ").upper()
 
-    if opcao == "E":
-        excluir(usuarios,input("Qual login deseja excluir?"))
+    print("Exibindo ip´s: ")
+    for ip in ips.keys():
+        print(ip[0]+"."+ip[1])
 
-    if opcao == "L":
-       listar(usuarios)
-    opcao = perguntar()  
+print("Exibindo máquinas com o mesmo endereço: ")
+pesquisa=input("Digite os dois últimos octetos: ")
+for ip, nome in ips.items():
+    print("Máquinas no mesmo endereço (redes diferentes)")
+    if(ip[1]==pesquisa):
+        print(nome)
 
+print("Exibindo as máquinas que compôem uma mesma rede: ")
+rede = input("Digite os dois primeiros octetos: ")
+for ip, nome in ips.items():
+    if(ip[0] == rede):
+        print(nome)

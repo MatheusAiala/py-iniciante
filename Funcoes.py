@@ -32,18 +32,29 @@ def pesquisar(dicionario, chave):
     dados = dicionario.get(chave)
     if dados:
         print("\n--- Dados do Usuário ---")
-        
+    for campo, valor in dados.items():  
+         print(f"{campo}: {valor}")
+    else: 
+        print("Usuário não encontrado.")    
+
 
 def excluir(dicionario, chave):
-    if dicionario.get(chave)!=None:
+    if chave in dicionario:
         del dicionario[chave]
-    print("Objeto Eliminado")
+        print("Usuário excuído com sucesso!.")
+    else:
+        print("Usuàrio não encontrado.")
 
 def listar(dicionario):
-    for chave, valor in dicionario.items():
-        print("Objeto.....")
-        print("Login:", chave)
-        print("Dados:", valor)
+    if dicionario:
+        print("\n--- Lista de Usuário ---")
+        for chave, dados in dicionario.items():
+            print(f"Código: {chave}")
+            for campo, valor in dados.items():
+                print(f"{campo}: {valor}")
+            print("--------------------------")
+    else:
+        print("Nenhum usuário cadastrado.")
 
 from datetime import date
 
